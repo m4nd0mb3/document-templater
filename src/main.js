@@ -6,7 +6,6 @@ const fs = require('fs');
 const db = require("./core/database")
 // Require the upload middleware
 const upload = require('./middlewares/upload');
-const { v4: uuidv4 } = require('uuid');
 
 const serverConfig = require('../configs/server');
 

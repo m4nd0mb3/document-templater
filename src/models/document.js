@@ -48,7 +48,6 @@ class Document{
 
             return result;
         } catch (error) {
-            console.error(error,1);
             throw Error("Document Not Found!");
         }
     }

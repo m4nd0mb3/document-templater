@@ -1,3 +1,6 @@
+
+const carbone = require('carbone');
+
 function hasSameStructure(obj1, obj2) {
   // Se os dois objetos não forem do mesmo tipo, eles têm estruturas diferentes
   if (typeof obj1 !== typeof obj2) {
@@ -26,34 +29,61 @@ function hasSameStructure(obj1, obj2) {
   return true;
 }
 
-// Exemplo de uso:
-const obj1 = {
-  name: 'John',
-  age: 30,
-  address: {
-    city: 'New York',
-    country: 'USA',
-  },
-};
+async function generateDocument(params) {
+    try {
+        const {template, data, options} = params;
+        const result = await new Promise((resolve, reject) => {
+            carbone.render(template, data, options, (err, file) => {
+                if (err) {
+                    reject(err);
+                }
+                resolve(file);
+            });
+        });
 
-const obj2 = {
-  name: 'Jane',
-  age: 25,
-  address: {
-    city: 'San Francisco',
-    country: 'USA',
-  },
-};
+        return result;
+    } catch (err) {
+        throw Error('Error generating document | '+ err);
+    }
+    
+}
 
-const obj3 = {
-  name: 'Alice',
-  age: 28,
-  address: {
-    city: 'Los Angeles',
-    country: 'USA',
-  },
-};
+function isDictEmpty(dict) {
+    return dict === null || dict === undefined || Object.keys(dict).length === 0
+}
 
-console.log(hasSameStructure(obj1, obj2)); // true
-console.log(hasSameStructure(obj1, obj3)); // true
-console.log(hasSameStructure(obj2, obj3)); // true
+exports.hasSameStructure = hasSameStructure;
+exports.generateDocument = generateDocument;
+exports.isDictEmpty = isDictEmpty;
+
+// // Exemplo de uso para test:
+// const obj1 = {
+//   name: 'John',
+//   age: 30,
+//   address: {
+//     city: 'New York',
+//     country: 'USA',
+//   },
+// };
+
+// const obj2 = {
+//   name: 'Jane',
+//   age: 25,
+//   address: {
+//     city: 'San Francisco',
+//     country: 'USA',
+//   },
+// };
+
+// const obj3 = {
+//   name: 'Alice',
+//   age: 28,
+//   address: {
+//     city: 'Los Angeles',
+//     country: 'USA',
+//   },
+// };
+
+// console.log(hasSameStructure(obj1, obj2)); // true
+// console.log(hasSameStructure(obj1, obj3)); // true
+// console.log(hasSameStructure(obj2, obj3)); // true
