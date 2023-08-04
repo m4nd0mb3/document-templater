@@ -1,12 +1,7 @@
-# Document Templater - Template Based Document Generation Microservice
-
-[![GitHub issues](https://img.shields.io/github/issues/m4nd0mb3/document-templater.svg)](https://github.com/m4nd0mb3/document-templater/issues)
-
-[![GitHub followers](https://img.shields.io/github/followers/m4nd0mb3.svg?style=social&label=Follow)](https://github.com/m4nd0mb3)
 
 <p align="center">
   <a href="https://carbone.io/" target="_blank">
-    <img alt="CarboneJS" width="100" src="https://carbone.io/img/favicon.png">
+    <img alt="CarboneJS" width="" src="./locales/Doc.png">
   </a>
 </p>
 
@@ -33,6 +28,8 @@
     <img src="https://badgen.net/github/forks/m4nd0mb3/document-templater?icon=github" alt="github fork badge">
   </a>
 </p>
+
+<p><b>⚡️ Document Templater</b> - Template Based Document Generation Microservice</p>
 
 
 Select your language:
