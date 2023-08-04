@@ -1,6 +1,6 @@
-# Repositório de Exemplo
+# Document Templater - Template Based Document Generation Microservice
 
-Selecione o idioma:
+Select your language:
 
-- [English](./locales/en/README.md)
-- [Português](./locales/pt/README.md)
+- ![English](./locales/en/en-rect.png) <img src="./locales/en/en-rect.png" alt="English" width="20" height="20"> [English](./locales/en/README.md)
+- ![Português](./locales/pt/pt-rect.png) [Português](./locales/pt/README.md)
