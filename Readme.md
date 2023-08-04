@@ -1,6 +1,23 @@
 # Document Templater - Template Based Document Generation Microservice
 
-Select your language:
+<div style="text-align: center;">
+    <p>
+        <h3>Select your language:</h3>
+    </p>
+    <hr>
+    <p>
+        <a href="./locales/en/README.md">
+            <img src="./locales/en/en-rect.png" alt="English" width="100" height="100">
+            <br> English
+        </a>
+    </p>
+    <hr>
+    <p>
+        <a href="./locales/pt/README.md">
+            <img src="./locales/pt/pt-rect.png" alt="English" width="115" height="70">
+            <br>Português
+        </a>
+    </p>
+    <hr>
 
-- ![English](./locales/en/en-rect.png) <img src="./locales/en/en-rect.png" alt="English" width="20" height="20"> [English](./locales/en/README.md)
-- ![Português](./locales/pt/pt-rect.png) [Português](./locales/pt/README.md)
+</div>
