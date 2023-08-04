@@ -29,10 +29,28 @@
   </a>
 </p>
 
-<p><b>⚡️ Document Templater</b> - Template Based Document Generation Microservice</p>
+<p><b>🤖 Document Templater</b> - Template Based Document Generation Microservice</p>
+
+Document Templater is a powerful and flexible microservice designed to simplify the generation of complex, personalised documents from predefined templates. Combining ease of use with the ability to create highly personalised documents, this microservice is ideal for automating the process of generating reports, contracts, forms and more.
+
+## Table of content
+
+README language: :angola: [Português](./locales/pt/README.md), :us: [English](README.md)
 
 
-Select your language:
+- [Key Features](#key-features)
 
-- [English](./locales/en/README.md)
-- [Português](./locales/pt/README.md)
+
+## Key Features
+
+- 📝 Generate professional, elegant documents from pre-loaded templates.
+- 🎨 Easily customise documents by incorporating specific data.
+- 🌈 Support for multiple template formats, including Word (docx) and PDF.
+- 🍏 Simple integration with external APIs to fetch data in real time.
+- ⭐️ Flexible settings to adjust the appearance and content of documents.
+- 📐 Intuitive API that allows seamless integration into your existing projects.
+
+Document Templater offers a scalable and efficient solution to meet your document generation needs, saving you time and ensuring consistent, high-quality results.
+
+Bring document generation to life easily and reliably with Document Templater.
+
