@@ -61,14 +61,6 @@ The core features of Document Templater include:
 - 📐 Intuitive API that allows seamless integration into your existing projects.
 
 
-
-
-- Templating Engine: Easily create templates using a wide range of data sources.
-- Supported Formats: Generate documents in various formats, including PDF, DOCX, ODT, text, HTML, and PNG.
-- Dynamic Data: Merge data from JSON, databases, APIs, and more into your templates.
-- Express API: Document Templater provides an Express API for easy integration into your projects.
-- Scalability: Deploy the service and scale it according to your needs.
-
 Document Templater offers a scalable and efficient solution to meet your document generation needs, saving you time and ensuring consistent, high-quality results.
 
 Bring document generation to life easily and reliably with Document Templater.

@@ -51,6 +51,9 @@ README language: :angola: [Português](README.md), :us: [English](../../README.m
 
 O Document Templater utiliza a biblioteca Carbone para fundir modelos com dados, produzindo os documentos de saída desejados. Utiliza Node.js e Express.js para o backend, permitindo-lhe construir um serviço de geração de documentos robusto e personalizável.
 
+
+As principais características do Document Templater incluem:
+
 - 📝 Gere documentos profissionais e elegantes a partir de modelos pré-carregados.
 - 🎨 Personalize facilmente os documentos incorporando dados específicos.
 - 🌈 Suporte a diversos formatos de modelo, incluindo Word (docx) e PDF.
@@ -61,14 +64,6 @@ O Document Templater utiliza a biblioteca Carbone para fundir modelos com dados,
 O Document Templater oferece uma solução escalável e eficiente para atender às suas necessidades de geração de documentos, economizando tempo e garantindo resultados consistentes e de alta qualidade.
 
 Dê vida à geração de documentos de forma fácil e confiável com o Document Templater.
-
-
-As principais características do Document Templater incluem:
-- Mecanismo de criação de modelos: Crie facilmente modelos usando uma ampla gama de fontes de dados.
-- Formatos suportados: Gerar documentos em vários formatos, incluindo PDF, DOCX, ODT, texto, HTML e PNG.
-- Dados dinâmicos: Combine dados de JSON, bancos de dados, APIs e muito mais em seus modelos.
-- API Expressa: O Document Templater fornece uma API Expressa para facilitar a integração nos seus projectos.
-- Escalabilidade: Implemente o serviço e dimensione-o de acordo com as suas necessidades.
 
 ## Getting Started
 
