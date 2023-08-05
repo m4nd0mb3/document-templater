@@ -1,7 +1,7 @@
 
 <p align="center">
-  <a href="https://carbone.io/" target="_blank">
-    <img alt="CarboneJS" width="" src="./locales/Doc.png">
+  <a href="https://github.com/m4nd0mb3/document-templater" target="_blank">
+    <img alt="Document Templater" width="" src="./locales/Doc.png">
   </a>
 </p>
 

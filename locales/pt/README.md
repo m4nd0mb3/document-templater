@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/m4nd0mb3/document-templater" target="_blank">
-    <img alt="CarboneJS" width="" src="../Doc.png">
+    <img alt="Document Templater" width="" src="../Doc.png">
   </a>
 </p>
 
