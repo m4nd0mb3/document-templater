@@ -1,5 +1,5 @@
 {
-  "name": "document-generator",
+  "name": "document-templater",
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
@@ -11,6 +11,7 @@
   "keywords": [
     "document",
     "generator",
+    "templater",
     "pdf",
     "docx",
     "odt",

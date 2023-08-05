@@ -35,7 +35,7 @@ Document Templater is a powerful and flexible microservice designed to simplify 
 
 ## Table of content
 
-README language: :angola: [Português](./locales/pt/README.md), :us: [English](README.md)
+README idiomas: :angola: [Português](./locales/pt/README.md), :us: [English](README.md)
 
 
 - [Key Features](#key-features)

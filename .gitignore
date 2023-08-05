@@ -1,7 +1,8 @@
-node_modules/
-*-lock.json
-*.lock
+# node_modules/
+# *-lock.json
+# *.lock
 src/templates/uploads/*
+LibreOffice_7.5.1.1_Linux_x86-64_deb/
 
 # Logs
 logs

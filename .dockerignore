@@ -1,6 +1,6 @@
 node_modules/
-*-lock.json
-*.lock
+# *-lock.json
+# *.lock
 src/templates/uploads/*
 
 # Logs
