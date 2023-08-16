@@ -1,5 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const swaggerUi = require('swagger-ui-express');
+const specs = require('../configs/swagger'); // Substitua pelo caminho do seu arquivo swagger.js
+
+const schemas= require('./schemas/document');
 // Require the upload middleware
 
 const serverConfig = require('../configs/server');
@@ -11,6 +15,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use(serverConfig.baseUrl, documentRouter);
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 app.listen(serverConfig.port, () => {
   console.log(`Server running at http://localhost:${serverConfig.port}`);

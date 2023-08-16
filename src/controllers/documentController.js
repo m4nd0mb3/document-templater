@@ -1,5 +1,6 @@
 const Document = require("../models/document");
 const utils = require("../core/utils");
+const fs = require('fs');
 const asyncHandler = require("express-async-handler");
 
 
@@ -43,8 +44,9 @@ exports.document_create_post = asyncHandler(async (req, res, next) => {
   const reference = req.file.filename;
   const tests_data = JSON.stringify(req.body);
   const name = req.file.originalname.split('.')[0];
+  const extension = req.file.originalname.split('.')[1];
 
-  new Document(name, reference, tests_data).save()
+  new Document(name, reference, tests_data, extension).save()
     .then(row => {
         res.json({
           "message":"Data inserted successfully!",
@@ -59,9 +61,86 @@ exports.document_create_post = asyncHandler(async (req, res, next) => {
 
 });
 
+// // Handle document delete on POST.
+// exports.document_delete_post = asyncHandler(async (req, res, next) => {
+//   // res.send("NOT IMPLEMENTED: document delete POST");
+//   const reference = req.params.reference;
+//   const data = req.body;
+//   await Document.findOneDocument(reference)
+//     .then(row => {
+//         // res.json({
+//         //   "message":"success",
+//         //   "data":row || []
+//         // })
+//       const filePath = `src/templates/uploads/${row.reference}`;
+
+//       fs.unlink(filePath, async (err) => {
+//         if (err) {
+//           console.error(err);
+//           return res.status(500).json({ message: 'Error deleting file' });
+//         }
+//         await Document.deleteDocument(reference)
+//         .then(row => {
+//             // res.json({
+//             //   "message":"success",
+//             //   "data":row || []
+//             // })
+//           return res.status(200).json({ message: 'File deleted successfully' });
+//         })
+//         .catch(error => {
+//             console.error(error);
+//             res.status(500).json({
+//               "message":error.message,
+//             })
+//         });
+//         return res.status(200).json({ message: 'File deleted successfully' });
+//       });
+//     })
+//     .catch(error => {
+//         console.error(error);
+//         res.status(404).json({
+//           "message":error.message,
+//         })
+//     });
+// });
 // Handle document delete on POST.
 exports.document_delete_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: document delete POST");
+    try {
+        const reference = req.params.reference;
+
+        await Document.findOneDocument(reference).then(document => {
+
+          const filePath = `src/templates/uploads/${document.reference}`;
+
+          fs.unlink(filePath, async (err) => {
+              if (err) {
+                  console.error(err);
+                  return res.status(500).json({ message: 'Error deleting file' });
+              }
+
+              await Document.deleteDocument(reference).then(deleteResult => {
+                return res.status(200).json({ message: 'File and document deleted successfully' });  
+              }).catch(error => {
+                  console.error(error);
+                  res.status(500).json({
+                    "error":"Error deleting document'"
+                  })
+              });
+               // Exclua o documento no banco de dados
+
+          });
+      })
+      .catch(error => {
+          console.error(error);
+          res.status(500).json({
+            "error":"Document not found"
+          })
+      });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+    
 });
 
 // Handle document update on PUT.

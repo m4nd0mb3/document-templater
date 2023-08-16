@@ -1,16 +1,17 @@
 const db = require("../core/database")
 
 class Document{
-    constructor(name, reference, tests_data){
+    constructor(name, reference, tests_data, extension){
         this.name = name;
         this.reference = reference;
         this.tests_data = tests_data;
+        this.extension = extension;
     }
 
     async save(){
         try {
-            const sql = "INSERT INTO document_templates (reference, name, tests_data) VALUES (?, ?, ?)"
-            const params = [this.reference, this.name, this.tests_data]
+            const sql = "INSERT INTO document_templates (reference, name, tests_data, extension) VALUES (?, ?, ?, ?)"
+            const params = [this.reference, this.name, this.tests_data, this.extension]
             const result = await new Promise((resolve, reject) => {
                 db.get(sql, params, (err, row) => {
                     if (err) {
@@ -31,7 +32,7 @@ class Document{
     static async  findOneDocument(reference){
         const sql = "select * from document_templates where reference = ?"
         const params = [reference]
-        console.log(params);
+        // console.log(params);
         
         try {
             const result = await new Promise((resolve, reject) => {
@@ -71,6 +72,28 @@ class Document{
         } catch (error) {
             console.error(error);
             return null;
+        }
+    }
+
+    static async deleteDocument(reference) {
+        const sql = "DELETE FROM document_templates WHERE reference = ?";
+        const params = [reference];
+
+        try {
+            await new Promise((resolve, reject) => {
+                db.run(sql, params, (err) => {
+                    if (err) {
+                        console.error(err);
+                        reject(err);
+                    } else {
+                        resolve();
+                    }
+                });
+            });
+            return true;
+        } catch (error) {
+            console.error(error);
+            return false;
         }
     }
 }

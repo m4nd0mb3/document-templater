@@ -13,7 +13,8 @@ let db = new sqlite3.Database(DBSOURCE, (err) => {
         db.run(`CREATE TABLE IF NOT EXISTS document_templates (
             reference TEXT PRIMARY KEY,
             name text,
-            tests_data text
+            tests_data text,
+            extension text
             )`,
         (err) => {
             // if (err) {
