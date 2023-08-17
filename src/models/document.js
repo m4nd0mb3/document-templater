@@ -1,17 +1,18 @@
 const db = require("../core/database")
 
 class Document{
-    constructor(name, reference, tests_data, extension){
+    constructor(name, reference, tests_data, extension, default_output){
         this.name = name;
         this.reference = reference;
         this.tests_data = tests_data;
         this.extension = extension;
+        this.default_output = default_output;
     }
 
     async save(){
         try {
-            const sql = "INSERT INTO document_templates (reference, name, tests_data, extension) VALUES (?, ?, ?, ?)"
-            const params = [this.reference, this.name, this.tests_data, this.extension]
+            const sql = "INSERT INTO document_templates (reference, name, tests_data, extension, default_output) VALUES (?, ?, ?, ?, ?)"
+            const params = [this.reference, this.name, this.tests_data, this.extension, this.default_output]
             const result = await new Promise((resolve, reject) => {
                 db.get(sql, params, (err, row) => {
                     if (err) {

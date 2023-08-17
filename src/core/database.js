@@ -14,6 +14,7 @@ let db = new sqlite3.Database(DBSOURCE, (err) => {
             reference TEXT PRIMARY KEY,
             name text,
             tests_data text,
+            default_output text,
             extension text
             )`,
         (err) => {

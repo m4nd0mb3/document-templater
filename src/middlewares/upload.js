@@ -8,9 +8,10 @@ const storage = multer.diskStorage({
     cb(null, 'src/templates/uploads/');
   },
   filename: (req, file, cb) => {
-    let extension = file.originalname.split('.')
-    extension = extension[extension.length-1];
-    cb(null, uuidv4() + '.' + extension);
+    // let extension = file.originalname.split('.')
+    // extension = extension[extension.length-1];
+    cb(null, uuidv4() );
+    // cb(null, uuidv4() + '.' + extension);
     // cb(null, Date.now() + '-' + file.originalname);
   }
 });

@@ -42,67 +42,50 @@ exports.document_detail = asyncHandler(async (req, res, next) => {
 exports.document_create_post = asyncHandler(async (req, res, next) => {
   // res.send("NOT IMPLEMENTED: document create POST");
   const reference = req.file.filename;
-  const tests_data = JSON.stringify(req.body);
+  // const tests_data = JSON.stringify(req.body.tests_data);
+  const tests_data = JSON.stringify(req.body.tests_data, (key, value) => {
+    // Verifica se o valor é um objeto vazio e mantém como objeto
+    if (Object.keys(value).length === 0) {
+      return value;
+    }
+    // Caso contrário, deixa o JSON.stringify() transformar o valor em string
+    return value;
+  });
   const name = req.file.originalname.split('.')[0];
   const extension = req.file.originalname.split('.')[1];
+  const default_output = req.body.default_output || null;
+  console.log(utils.documentFormats(), default_output);
+  // return
 
-  new Document(name, reference, tests_data, extension).save()
-    .then(row => {
-        res.json({
-          "message":"Data inserted successfully!",
+  if (utils.documentFormats().includes(extension)){
+    if (utils.validOutputs()[extension].includes(default_output)) {
+      new Document(name, reference, tests_data, extension, default_output).save()
+        .then(row => {
+            res.json({
+              "message":"Data inserted successfully!",
+            })
         })
+        .catch(error => {
+            console.error(error);
+            res.status(500).json({
+              "error":"Failed to insert data"
+            })
+        });
+    }
+    else {
+      res.status(422).json({
+        "error": `${default_output} is not a valid default output for ${extension}.`
+      })
+    }
+  }
+  else {
+    res.status(422).json({
+      "error": `${extension} is not a valid document format to be a document templater. Must be one of ${utils.documentFormats()}.`
     })
-    .catch(error => {
-        console.error(error);
-        res.status(500).json({
-          "error":"Failed to insert data"
-        })
-    });
+  }
 
 });
 
-// // Handle document delete on POST.
-// exports.document_delete_post = asyncHandler(async (req, res, next) => {
-//   // res.send("NOT IMPLEMENTED: document delete POST");
-//   const reference = req.params.reference;
-//   const data = req.body;
-//   await Document.findOneDocument(reference)
-//     .then(row => {
-//         // res.json({
-//         //   "message":"success",
-//         //   "data":row || []
-//         // })
-//       const filePath = `src/templates/uploads/${row.reference}`;
-
-//       fs.unlink(filePath, async (err) => {
-//         if (err) {
-//           console.error(err);
-//           return res.status(500).json({ message: 'Error deleting file' });
-//         }
-//         await Document.deleteDocument(reference)
-//         .then(row => {
-//             // res.json({
-//             //   "message":"success",
-//             //   "data":row || []
-//             // })
-//           return res.status(200).json({ message: 'File deleted successfully' });
-//         })
-//         .catch(error => {
-//             console.error(error);
-//             res.status(500).json({
-//               "message":error.message,
-//             })
-//         });
-//         return res.status(200).json({ message: 'File deleted successfully' });
-//       });
-//     })
-//     .catch(error => {
-//         console.error(error);
-//         res.status(404).json({
-//           "message":error.message,
-//         })
-//     });
-// });
 // Handle document delete on POST.
 exports.document_delete_post = asyncHandler(async (req, res, next) => {
     try {
@@ -152,41 +135,51 @@ exports.document_update_post = asyncHandler(async (req, res, next) => {
 exports.document_generate_get = asyncHandler(async (req, res, next) => {
   // res.send("NOT IMPLEMENTED: document generate GET");
   const reference = req.params.reference;
-  const data = req.body;
+  const output_format = req.query.output_format || null;
+  const data = req.body.data;
   await Document.findOneDocument(reference)
-    .then(row => {
+    .then(async row => {
         // res.json({
         //   "message":"success",
         //   "data":row || []
         // })
-      const tests_data = JSON.parse(row.tests_data)
-      if (utils.isDictEmpty(data)){
-        return res.status(400).json({
-          "message":"The body of the requisition is empty.",
-        })
-      }
-      if (!utils.hasSameStructure(data, tests_data)){
-        return res.status(422).json({
-          "message":"Could not process because the structure of the input data is incompatible. Based on the example below:\n"+row.tests_data,
-        })
-      }
-      const params = {
-        template: `src/templates/uploads/${row.reference}`,
-        data: data,
-        options: {
-          convertTo : 'pdf', //can be docx, txt, pdf, odt ...
-        }
-      }
-      utils.generateDocument(params)
-        .then(result => {
-          res.contentType('application/pdf');
-          res.send(result);
-        })
-        .catch(error => {
-          res.status(500).json({
-            "message":error.message,
+      const default_output = output_format || row.default_output
+      if (utils.validOutputs()[row.extension].includes(default_output)) {
+        const tests_data = await JSON.parse(row.tests_data)
+        // if (utils.isDictEmpty(data)){
+        //   return res.status(400).json({
+        //     "message":"The body of the requisition is empty.",
+        //   })
+        // }
+        console.log(typeof data, typeof tests_data);
+        if (!utils.hasSameStructure(data, tests_data)){
+          return res.status(422).json({
+            "message":"Could not process because the structure of the input data is incompatible. Based on the example below:\n"+row.tests_data,
           })
-        })
+        }
+        const params = {
+          template: `src/templates/uploads/${row.reference}`,
+          data: data,
+          options: {
+            convertTo : default_output, //can be docx, txt, pdf, odt ...
+          }
+        }
+        utils.generateDocument(params)
+          .then(result => {
+            res.contentType(utils.getContentType(default_output));
+            res.send(result);
+          })
+          .catch(error => {
+            res.status(500).json({
+              "message":error.message,
+            })
+          })
+        }
+        else {
+          res.status(422).json({
+            "error": `${default_output} is not a valid default output for ${row.extension}.`
+          })
+        }
     })
     .catch(error => {
         console.error(error);
@@ -200,38 +193,48 @@ exports.document_generate_get = asyncHandler(async (req, res, next) => {
 exports.document_sandbox_get = asyncHandler(async (req, res, next) => {
   // res.send("NOT IMPLEMENTED: document sandbox GET");
   const reference = req.params.reference;
-  const data = req.body;
+  const output_format = req.query.output_format || null;
+  const data = req.body.data;
   console.log(data);
+  // return
   await Document.findOneDocument(reference)
     .then(row => {
         // res.json({
         //   "message":"success",
         //   "data":row || []
         // })
-      const tests_data = JSON.parse(row.tests_data)
-      console.log(tests_data, data);
-      if (!utils.isDictEmpty(data) && !utils.hasSameStructure(data, tests_data)){
-        return res.status(422).json({
-          "message":"Could not process because the structure of the input data is incompatible. Based on the example below:\n"+row.tests_data,
-        })
-      }
-      const params = {
-        template: `src/templates/uploads/${row.reference}`,
-        data: !utils.isDictEmpty(data) ? data : tests_data,
-        options: {
-          convertTo : 'pdf', //can be docx, txt, pdf, odt ...
-        }
-      }
-      utils.generateDocument(params)
-        .then(result => {
-          res.contentType('application/pdf');
-          res.send(result);
-        })
-        .catch(error => {
-          res.status(500).json({
-            "message":error.message,
+      const default_output = output_format || row.default_output
+      if (utils.validOutputs()[row.extension].includes(default_output)) {
+        const tests_data = JSON.parse(row.tests_data)
+        console.log(tests_data, data);
+        if (!utils.isDictEmpty(data) && !utils.hasSameStructure(data, tests_data)){
+          return res.status(422).json({
+            "message":"Could not process because the structure of the input data is incompatible. Based on the example below:\n"+row.tests_data,
           })
-        })
+        }
+        const params = {
+          template: `src/templates/uploads/${row.reference}`,
+          data: !utils.isDictEmpty(data) ? data : tests_data,
+          options: {
+            convertTo : default_output //can be docx, txt, pdf, odt ...
+          }
+        }
+        utils.generateDocument(params)
+          .then(result => {
+            res.contentType(utils.getContentType(default_output));
+            res.send(result);
+          })
+          .catch(error => {
+            res.status(500).json({
+              "message":error.message,
+            })
+          })
+        }
+        else {
+          res.status(422).json({
+            "error": `${default_output} is not a valid default output for ${row.extension}.`
+          })
+        }
     })
     .catch(error => {
         console.error(error);
