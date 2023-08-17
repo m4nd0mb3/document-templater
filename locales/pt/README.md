@@ -40,7 +40,7 @@ README language: :angola: [Português](README.md), :us: [English](../../README.m
 - [How It Works](#how-it-works)
 - [Getting Started](#getting-started)
     - [Prerequisites](#prerequisites)
-- [Basic Endpoints](#basic-endpoints)
+- [Swagger](#swagger)
 - [Configuration](#configuration)
 - [Contributing](#contributing)
 - [License](#license)
@@ -125,100 +125,25 @@ Para executar o Document Templater usando o Docker, siga estas etapas:
 3. Abra o navegador da Web e navegue até [http://localhost:3000](http://localhost:3000).
 
 
-## Basic Endpoints
+## Swagger
 
-Document Templater provides a set of basic endpoints to interact with the document generation service. Below are the examples of how to use these endpoints.
+O Document Templater apresenta uma integração perfeita com o Swagger, aprimorando sua experiência com o serviço de geração de documentos! 📄✨
 
-### Create Document Template
+Com o Swagger, acessar o conjunto de endpoints básicos do Document Templater nunca foi tão fácil. Se você é um desenvolvedor experiente ou está começando, vai adorar a simplicidade e eficiência que ele proporciona para interagir com o serviço de geração de documentos.
 
-**Endpoint:** `api/v1/document/create`
+Aqui está um vislumbre de como você pode usar o Swagger para interagir com os endpoints do Document Templater:
 
-**Method:** `POST`
+1. **Explore a Documentação:** Navegue na documentação abrangente fornecida pelo Swagger para entender os endpoints disponíveis e suas funcionalidades.
 
-**Description:** Create or save a template document based on a provided template and data. Only document file field is required all others will be used to test the data in the sandbox.
+2. **Experimente na Prática:** Utilize a interface amigável para testar diferentes parâmetros e ver respostas em tempo real, permitindo ajustar suas solicitações conforme necessário.
 
-**Request Body:**
+3. **Gere Documentos:** Aproveite os endpoints para criar e gerenciar documentos de forma simples e eficaz, tudo em uma plataforma unificada.
 
-```json
-{
-  "document": "path/to/pdf-template.docx",
-  "data":{
-    "firstname": "John",
-    "lastname": "Doe"
-  }
-}
-```
-
-**Response:**
-```json
-{
-  "message":"Data inserted successfully!"
-}
-```
-
-### List All Document Template
-
-**Endpoint:** `api/v1/documents`
-
-**Method:** `GET`
-
-**Description:** List all templates stored. Look that the string on tests_data we gonna use to test our sandbox...
-
-**Request Body:**
-
-```json
-{
-}
-```
-
-**Response:**
-```json
-{
-  "message": "success",
-  "data": [
-    {
-      "reference": "3da7aa72-0760-4b56-9ba6-efa337c1db2b.odt",
-      "name": "simple",
-      "tests_data": "{\"firstname\":\"rasmushed\",\"lastname\":\"Igor\",\"age\":\"30\"}"
-    },
-    {
-      "reference": "fbc57e45-6cbd-4250-8616-1e5038b01ad5.pptx",
-      "name": "Capa Envelope SV",
-      "tests_data": "{\"title\":\"Test PPTX\"}"
-    }
-  ]
-}
-```
-
-### Test Our Document Template
-
-**Endpoint:** `api/v1/document/{reference}/sandbox`
-
-**Method:** `GET`
-
-**Description:** Generates a PDF document based on a reference provided template and data.
-
-**Request Body:** Optional, but if you enter, the body data must to have the sabe key structure with tests_data.
+Para começar, acesse a documentação do Document Templater no Swagger através do seguinte endpoint: 
 
 
-**Response:**
+**Endpoint:** `/api-docs/`
 
-A generated PDF document.
-
-### Generate Document Template
-
-**Endpoint:** `api/v1/document/{reference}/generate`
-
-**Method:** `GET`
-
-**Description:** Generates a PDF document based on a reference provided template and data.
-
-**Request Body:** Dhe body data must to have the sabe key structure with tests_data.
-
-
-**Response:**
-
-A generated PDF document.
 
 
 ---
