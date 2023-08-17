@@ -5,8 +5,8 @@
 </p>
 
 <p align="center">
-<a href="https://github.com/m4nd0mb3/document-templater/releases">
-    <img src="https://badgen.net/github/release/m4nd0mb3/document-templater" alt="GitHub release">
+<a href="https://github.com/m4nd0mb3/document-templater/releases/latest">
+    <img src="https://badgen.net/github/release/m4nd0mb3/document-templater/latest" alt="GitHub release">
   </a>
   <a href="https://github.com/m4nd0mb3/document-templater/releases">
     <img src="https://img.shields.io/github/downloads/m4nd0mb3/document-templater/total.svg" alt="GitHub downloads">
