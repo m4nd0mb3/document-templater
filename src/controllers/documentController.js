@@ -136,7 +136,8 @@ exports.document_generate_get = asyncHandler(async (req, res, next) => {
   // res.send("NOT IMPLEMENTED: document generate GET");
   const reference = req.params.reference;
   const output_format = req.query.output_format || null;
-  const data = req.body.data;
+  let data = typeof(req.body) == 'string' ? JSON.parse(req.body): req.body;
+  data = typeof(data) == 'string' ? JSON.parse(data): data;
   await Document.findOneDocument(reference)
     .then(async row => {
         // res.json({
@@ -145,18 +146,20 @@ exports.document_generate_get = asyncHandler(async (req, res, next) => {
         // })
       const default_output = output_format || row.default_output
       if (utils.validOutputs()[row.extension].includes(default_output)) {
-        const tests_data = await JSON.parse(row.tests_data)
+        const tests_data = JSON.parse(JSON.parse(row.tests_data))
+        // data = typeof(data.data) == 'string' ? JSON.parse(data.data): data.data;
         // if (utils.isDictEmpty(data)){
         //   return res.status(400).json({
         //     "message":"The body of the requisition is empty.",
         //   })
         // }
         console.log(typeof data, typeof tests_data);
-        if (!utils.hasSameStructure(data, tests_data)){
-          return res.status(422).json({
-            "message":"Could not process because the structure of the input data is incompatible. Based on the example below:\n"+row.tests_data,
-          })
-        }
+        console.log( data,  tests_data);
+        // if (!utils.hasSameStructure(data, tests_data)){
+        //   return res.status(422).json({
+        //     "message":"Could not process because the structure of the input data is incompatible. Based on the example below:\n"+row.tests_data,
+        //   })
+        // }
         const params = {
           template: `src/templates/uploads/${row.reference}`,
           data: data,
@@ -194,8 +197,10 @@ exports.document_sandbox_get = asyncHandler(async (req, res, next) => {
   // res.send("NOT IMPLEMENTED: document sandbox GET");
   const reference = req.params.reference;
   const output_format = req.query.output_format || null;
-  const data = req.body.data;
+  let data = typeof(req.body) == 'string' ? JSON.parse(req.body): req.body;
+  data = typeof(data) == 'string' ? JSON.parse(data): data;
   console.log(data);
+  // console.log(JSON.parse(req.body));
   // return
   await Document.findOneDocument(reference)
     .then(row => {
@@ -205,8 +210,11 @@ exports.document_sandbox_get = asyncHandler(async (req, res, next) => {
         // })
       const default_output = output_format || row.default_output
       if (utils.validOutputs()[row.extension].includes(default_output)) {
-        const tests_data = JSON.parse(row.tests_data)
-        console.log(tests_data, data);
+        const tests_data = JSON.parse(JSON.parse(row.tests_data))
+        data = typeof(data.data) == 'string' ? JSON.parse(data.data): data.data;
+        console.log(tests_data.lines, typeof row.tests_data);
+        // console.log(typeof(data), data);
+        console.log(utils.isDictEmpty(tests_data));
         if (!utils.isDictEmpty(data) && !utils.hasSameStructure(data, tests_data)){
           return res.status(422).json({
             "message":"Could not process because the structure of the input data is incompatible. Based on the example below:\n"+row.tests_data,

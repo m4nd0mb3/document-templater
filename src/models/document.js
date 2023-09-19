@@ -38,7 +38,7 @@ class Document{
         try {
             const result = await new Promise((resolve, reject) => {
                 db.get(sql, params, (err, row) => {
-                    console.log(err, row);
+                    // console.log(err, row);
                     // if (row == null)
                     if (err || !row) {
                         reject(err);

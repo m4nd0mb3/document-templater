@@ -1,31 +1,31 @@
 
 <p align="center">
-  <a href="https://github.com/m4nd0mb3/sentinel-notify" target="_blank">
+  <a href="https://github.com/m4nd0mb3/document-templater" target="_blank">
     <img alt="Document Templater" width="" src="./locales/Doc.png">
   </a>
 </p>
 
 <p align="center">
-<a href="https://github.com/m4nd0mb3/sentinel-notify/releases">
-    <img src="https://badgen.net/github/release/m4nd0mb3/sentinel-notify" alt="GitHub release">
+<a href="https://github.com/m4nd0mb3/document-templater/releases">
+    <img src="https://badgen.net/github/release/m4nd0mb3/document-templater" alt="GitHub release">
   </a>
-  <a href="https://github.com/m4nd0mb3/sentinel-notify/releases">
-    <img src="https://img.shields.io/github/downloads/m4nd0mb3/sentinel-notify/total.svg" alt="GitHub downloads">
+  <a href="https://github.com/m4nd0mb3/document-templater/releases">
+    <img src="https://img.shields.io/github/downloads/m4nd0mb3/document-templater/total.svg" alt="GitHub downloads">
   </a>
-  <a href="https://github.com/m4nd0mb3/sentinel-notify/blob/master/LICENSE">
-    <img src="https://badgen.net/github/license/m4nd0mb3/sentinel-notify" alt="GitHub license">
+  <a href="https://github.com/m4nd0mb3/document-templater/blob/master/LICENSE">
+    <img src="https://badgen.net/github/license/m4nd0mb3/document-templater" alt="GitHub license">
   </a><br/>
-  <a href='https://sentinel-notify.readthedocs.io/en/latest/?badge=latest'>
-    <img src='https://readthedocs.org/projects/sentinel-notify/badge/?version=latest' alt='Documentation Status' />
+  <a href='https://document-templater.readthedocs.io/en/latest/?badge=latest'>
+    <img src='https://readthedocs.org/projects/document-templater/badge/?version=latest' alt='Documentation Status' />
   </a>   
-  <a href="https://github.com/m4nd0mb3/sentinel-notify/issues">
-    <img src="https://badgen.net/github/issues/m4nd0mb3/sentinel-notify" alt="GitHub issues">
+  <a href="https://github.com/m4nd0mb3/document-templater/issues">
+    <img src="https://badgen.net/github/issues/m4nd0mb3/document-templater" alt="GitHub issues">
   </a>
   <a href="https://github.com/m4nd0mb3">
-    <img src="https://badgen.net/github/contributors/m4nd0mb3/sentinel-notify" alt="GitHub followers">
+    <img src="https://badgen.net/github/contributors/m4nd0mb3/document-templater" alt="GitHub followers">
   </a>
   <a href="https://github.com/carboneio/carbone">
-    <img src="https://badgen.net/github/forks/m4nd0mb3/sentinel-notify?icon=github" alt="github fork badge">
+    <img src="https://badgen.net/github/forks/m4nd0mb3/document-templater?icon=github" alt="github fork badge">
   </a>
 </p>
 
