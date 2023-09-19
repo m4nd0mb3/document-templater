@@ -2,8 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const swaggerUi = require('swagger-ui-express');
 const specs = require('../configs/swagger'); // Substitua pelo caminho do seu arquivo swagger.js
-
 const schemas= require('./schemas/document');
+const cors = require('cors')
 // Require the upload middleware
 
 const serverConfig = require('../configs/server');
@@ -11,6 +11,7 @@ const serverConfig = require('../configs/server');
 const documentRouter = require('./routes/document');
 
 const app = express();
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
