@@ -12,8 +12,8 @@ const documentRouter = require('./routes/document');
 
 const app = express();
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false, limit:'100mb' }));
+app.use(bodyParser.json({ limit:'100mb'}));
 
 app.use(serverConfig.baseUrl, documentRouter);
 
