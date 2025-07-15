@@ -63,6 +63,7 @@ exports.document_create_post = asyncHandler(async (req, res, next) => {
         .then(row => {
             res.json({
               "message":"Data inserted successfully!",
+              "reference": row.reference
             })
         })
         .catch(error => {

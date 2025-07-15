@@ -11,7 +11,7 @@ class Document{
 
     async save(){
         try {
-            const sql = "INSERT INTO document_templates (reference, name, tests_data, extension, default_output) VALUES (?, ?, ?, ?, ?)"
+            const sql = "INSERT INTO document_templates (reference, name, tests_data, extension, default_output) VALUES (?, ?, ?, ?, ?) RETURNING reference"
             const params = [this.reference, this.name, this.tests_data, this.extension, this.default_output]
             const result = await new Promise((resolve, reject) => {
                 db.get(sql, params, (err, row) => {
